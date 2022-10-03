@@ -12,7 +12,7 @@ const root = document.getElementById('root')
 const container = createRoot(root)
 
 container.render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+
+  <App />
+
 )
