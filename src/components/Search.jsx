@@ -1,55 +1,64 @@
-import React, { useState } from 'react'
-import useGetData from '../hooks/useGetData'
+import React, { useEffect, useState } from 'react'
+import getUrl from '../utils/config'
+import { getToday } from '../utils/getToday'
 
 const Search = () => {
-  const [day, setDay] = useState('')
+  const [day, setDay] = useState(getToday)
+  const [data, setData] = useState([] || {})
+  const [loading, setLoading] = useState(true)
+
+  console.log('url', getUrl(day))
 
   const handleSubmit = (e) => {
     // Evitamos que la paguina se recarge por el btn type submit
     e.preventDefault()
-    console.log('You clicked submit.') // valido que entre al submit
-    // setDay('') // limpia la busqueda
-    console.log('day guardado:', day)
-    /* const { data } = useGetData({ day })
-    console.log('🚀 ~ data', data) */
+    setDay('') // limpia la busqueda
+    getData(getUrl(day))
   }
 
   /* test 1 Funciono al 100% */
-  /* const [data, setData] = useState([] || {})
-  const url = `https://api.nasa.gov/planetary/apod?date=${day}&api_key=QbohNMZcTf3ZNi4GPxnBnPpCKocqtYacoaPF8aRw` // date = yyyy-mm-dd
-
-  console.log('url', url)
 
   const getData = async (uri) => {
-    const request = await window.fetch(uri) // Request para el API
-    const resolve = await request.json() // Resolucion del API
-    setData(resolve) // Seteamos los datos del API atravez de un useState
+    try {
+      const request = await window.fetch(uri) // Request para el API
+      const resolve = await request.json() // Resolucion del API
+      setData(resolve) // Seteamos los datos del API atravez de un useState
+      setLoading(false) // Cambiamos el valor de Loading para para confirmar que ya cargo los datos
+    } catch (error) {
+      console.log('entre')
+      setLoading(true)
+    }
   }
 
-  console.log(data) */
+  useEffect(() => {
+    getData(getUrl(day))
+  }, [])
+
+  console.log('data global', data)
+  console.log('loading', loading)
 
   /* fin test */
 
   return (
-    <form className='d-flex' onSubmit={handleSubmit}>
-      <input
-        type='date'
-        name='day'
-        className='form-control me-sm-2'
-        min='1995-06-16'
-        value={day}
-        onChange={e => setDay(e.target.value)}
-        // max = 'funcion que genere el dia de hoy'
-      />
-      <button
-        type='submit'
+    <>
+      <form className='d-flex' onSubmit={handleSubmit}>
+        <input
+          type='date'
+          name='day'
+          className='form-control me-sm-2'
+          min='1995-06-16'
+          value={day}
+          onChange={e => setDay(e.target.value)}
+        />
+        <button
+          type='submit'
         // value='Search'
-        className='btn btn-secondary my-2 my-sm-0'
-        // onClick={() => getData(url)} // Test 1 funcional
-      >
-        Search
-      </button>
-    </form>
+          className='btn btn-secondary my-2 my-sm-0'
+        >
+          Search
+        </button>
+      </form>
+    </>
   )
 }
 
