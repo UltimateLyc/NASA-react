@@ -47,6 +47,7 @@ const Search = () => {
           name='day'
           className='form-control me-sm-2'
           min='1995-06-16'
+          max={getToday()}
           value={day}
           onChange={e => setDay(e.target.value)}
         />

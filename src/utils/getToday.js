@@ -1,3 +1,5 @@
+// Funcion para poder saber el dia actual
+
 const getToday = () => {
   const currentDate = new Date()
 
