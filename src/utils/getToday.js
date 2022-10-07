@@ -9,7 +9,7 @@ const getToday = () => {
 
   const actualDay = year + '-' + month + '-' + day
 
-  console.log(actualDay)
+  // console.log(actualDay)
   return actualDay
 }
 

@@ -1,3 +1,21 @@
 .container-fluid{
     padding: 0px;
 }
+
+h5{
+    text-align: center;
+    color: blueviolet;
+    font-size:x-large;
+}
+
+img{
+    border-radius: 15px !important;
+}
+
+#explanation{
+    text-align: justify;
+}
+
+#copyright{
+    text-align: end;
+}

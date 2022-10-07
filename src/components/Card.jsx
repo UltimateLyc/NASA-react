@@ -1,10 +1,12 @@
-const Card = () => {
+const Card = ({ api }) => {
+  console.log('test de api en card', api)
   return (
-    <div className='card container mt-5' style={{ width: '14rem' }}>
-      <img src='...' className='card-img-top' alt='...' />
+    <div className='card container mt-2' style={{ width: '40rem' }}>
+      <h5 className='card-title mt-2'>{api.title}</h5>
+      <img src={api.hdurl} className='card-img-top mt-0' alt={api.title} />
       <div className='card-body'>
-        <h5 className='card-title'>Card title</h5>
-        <p className='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p id='explanation' className='card-text'>{api.explanation}</p>
+        <p id='copyright'>{api.copyright} &copy; {api.date}</p>
       </div>
     </div>
   )

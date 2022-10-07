@@ -1,13 +1,14 @@
 import Container from './Container'
 import Search from './Search'
+import { FaRocket } from 'react-icons/fa'
 
-const Navbar = () => {
+const Navbar = ({ getApi }) => {
   return (
 
     <Container>
       <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
         <div className='container'>
-          <a className='navbar-brand' href='#'>NASA Astronomy Picture of the Day</a>
+          <a className='navbar-brand' href='#'><FaRocket /> NASA Astronomy Picture of the Day</a>
           <button className='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarColor01' aria-controls='navbarColor01' aria-expanded='false' aria-label='Toggle navigation'>
             <span className='navbar-toggler-icon' />
           </button>
@@ -19,7 +20,7 @@ const Navbar = () => {
               </a> */}
               </li>
             </ul>
-            <Search />
+            <Search getApi={getApi} />
           </div>
         </div>
       </nav>
