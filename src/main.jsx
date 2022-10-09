@@ -15,5 +15,4 @@ container.render(
   <StrictMode>
     <App />
   </StrictMode>
-
 )

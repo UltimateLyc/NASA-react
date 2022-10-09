@@ -1,43 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import getUrl from '../utils/config'
+import React, { useState } from 'react'
 import { getToday } from '../utils/getToday'
 
 const Search = ({ getApi }) => {
-  const [day, setDay] = useState(getToday)
-  const [data, setData] = useState([] || {})
-  const [loading, setLoading] = useState(true)
-
-  // console.log('url', getUrl(day))
+  const today = getToday()
+  const [day, setDay] = useState(today)
 
   const handleSubmit = (e) => {
     // Evitamos que la paguina se recarge por el btn type submit
     e.preventDefault()
-    setDay('') // limpia la busqueda
-    getData(getUrl(day))
+
+    getApi({ day })
+    // setDay('') // limpia la busqueda
   }
-
-  /* test 1 Funciono al 100% */
-
-  const getData = async (uri) => {
-    try {
-      const request = await window.fetch(uri) // Request para el API
-      const resolve = await request.json() // Resolucion del API
-      setData(resolve) // Seteamos los datos del API atravez de un useState
-      setLoading(false) // Cambiamos el valor de Loading para para confirmar que ya cargo los datos
-    } catch (error) {
-      // console.log('entre')
-      setLoading(true)
-    }
-  }
-
-  useEffect(() => {
-    getData(getUrl(day))
-  }, [])
-
-  getApi(data)
-  console.log('loading', loading)
-
-  /* fin test */
 
   return (
     <>
@@ -47,7 +21,7 @@ const Search = ({ getApi }) => {
           name='day'
           className='form-control me-sm-2'
           min='1995-06-16'
-          max={getToday()}
+          max={today}
           value={day}
           onChange={e => setDay(e.target.value)}
         />
